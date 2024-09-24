@@ -1,0 +1,38 @@
+
+const int numInputs = 3;
+
+const int analogInputPins[] = { A0, A1, A3 };
+
+int ledPins[] = { 2, 3, 5 };
+
+int mappedSensorValue = 0;
+int sensorValue = 0;
+
+int thresholds[] = { 512, 512, 512 };
+
+bool ledStates[] = { false, false, false};
+
+void setup() {
+  Serial.begin(9600);
+
+  for (int a = 0; a < numInputs; a++) {
+    pinMode(ledPins[a], OUTPUT);
+  }
+}
+
+void loop() {
+  for (int a = 0; a < numInputs; a++) {
+    int sensorValue = analogRead(analogInputPins[a]);
+
+    if (sensorValue > 100) {
+      ledStates[a] = true;
+      digitalWrite(ledPins[a], HIGH);
+    } else {
+      ledStates[a] = false;
+      digitalWrite(ledPins[a], LOW);
+    }
+
+  Serial.println("--------------------");
+
+  delay (30);  
+  }}
